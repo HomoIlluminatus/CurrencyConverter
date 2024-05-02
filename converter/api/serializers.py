@@ -8,9 +8,19 @@ class CurrencyRateSerializer(serializers.ModelSerializer):
         model = CurrencyRate
         fields = '__all__'
         
-class CurrencyConversionResponseSerializer(serializers.Serializer):
-    original_amount = serializers.DecimalField(max_digits=10, decimal_places=8)
+class CurrencyConversionRequestSerializer(serializers.Serializer):
+    amount = serializers.DecimalField(max_digits=20, decimal_places=10)
     from_currency = serializers.CharField(max_length=3)
-    converted_amount = serializers.DecimalField(max_digits=10, decimal_places=8)
+    to_currency = serializers.CharField(max_length=3)
+    
+    def validate_amount(self, amount):
+        if amount < 0:
+            raise serializers.ValidationError("amount должно быть положительным числом")
+        return amount
+        
+class CurrencyConversionResponseSerializer(serializers.Serializer):
+    original_amount = serializers.DecimalField(max_digits=20, decimal_places=10)
+    from_currency = serializers.CharField(max_length=3)
+    converted_amount = serializers.DecimalField(max_digits=20, decimal_places=10)
     to_currency = serializers.CharField(max_length=3)
     timestamp = serializers.DateTimeField()

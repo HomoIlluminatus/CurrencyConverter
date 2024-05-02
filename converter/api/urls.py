@@ -1,9 +1,9 @@
 from django.urls import path
 
-from .views import get_currency_rate
+from .views import CurrencyConversionAPIView
 
 app_name = 'api'
 
 urlpatterns = [
-    path('api/', get_currency_rate)
+    path('api/', CurrencyConversionAPIView.as_view())
 ]
