@@ -2,11 +2,12 @@ from rest_framework import serializers
 
 from .models import CurrencyRate
 
+
 class CurrencyRateSerializer(serializers.ModelSerializer):
     
     class Meta:
         model = CurrencyRate
-        fields = '__all__'
+        fields = "__all__"
         
 class CurrencyConversionRequestSerializer(serializers.Serializer):
     amount = serializers.DecimalField(max_digits=20, decimal_places=10)

@@ -160,3 +160,5 @@ params.py
 #  option (not recommended) you can uncomment the following to ignore the entire idea folder.
 #.idea/
 params.py
+converter/api/parser.py
+converter/api/management/commands/parse_data.py

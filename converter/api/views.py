@@ -11,9 +11,9 @@ class CurrencyConversionAPIView(APIView):
         serializer_request = CurrencyConversionRequestSerializer(data=request.data)
         
         if serializer_request.is_valid():
-            amount = serializer_request.validated_data['amount']
-            from_currency = serializer_request.validated_data['from_currency']
-            to_currency = serializer_request.validated_data['to_currency']
+            amount = serializer_request.validated_data["amount"]
+            from_currency = serializer_request.validated_data["from_currency"]
+            to_currency = serializer_request.validated_data["to_currency"]
             try:
                 from_currency_rate = CurrencyRate.objects.get(currency_code=from_currency)
             except CurrencyRate.DoesNotExist:
@@ -30,11 +30,11 @@ class CurrencyConversionAPIView(APIView):
             print(converted_amount)
             
             response = {
-                'original_amount': amount,
-                'from_currency': from_currency,
-                'converted_amount': converted_amount,
-                'to_currency': to_currency,
-                'timestamp': datetime.now()
+                "original_amount": amount,
+                "from_currency": from_currency,
+                "converted_amount": converted_amount,
+                "to_currency": to_currency,
+                "timestamp": datetime.now()
             }
             serializer_response = CurrencyConversionResponseSerializer(response)
             return Response(serializer_response.data, status=200)

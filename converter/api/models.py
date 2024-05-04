@@ -7,7 +7,10 @@ class CurrencyRate(models.Model):
     date_update = models.DateTimeField(auto_now=True)
     
     class Meta:
-        ordering = ['currency_code']
+        ordering = ["currency_code"]
+        indexes = [
+            models.Index(fields=["currency_code"]),
+        ]
     
     def __str__(self):
         return self.currency_code
